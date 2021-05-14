@@ -1,7 +1,7 @@
 package com.example.foodservice.data.service;
 
 import com.example.foodservice.data.repository.RoleUserRepository;
-import com.example.foodservice.ultis.bo.RoleUserBean;
+import com.example.foodservice.ultis.bean.RoleUserBean;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

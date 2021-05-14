@@ -1,4 +1,4 @@
-package com.example.foodservice.ultis.bo;
+package com.example.foodservice.ultis.bean;
 
 import lombok.Data;
 

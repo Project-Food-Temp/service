@@ -18,15 +18,22 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserForm {
-    private String firstName;
-    private String lastName;
+    private int id;
+    private String guid;
     private String username;
     private String password;
-    private String picture;
+    private String avatar;
+    private int age;
     private String email;
-    private Date dob;
-    private boolean gender;
     private String address;
     private String phoneNumber;
     private boolean status;
+    private String firstName;
+    private String lastName;
+    private String picture;
+    private Date dob;
+    private String gender;
+    private boolean enable;
+    private Date createDate;
+
 }

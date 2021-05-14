@@ -9,7 +9,7 @@ import com.example.foodservice.data.repository.RoleRepository;
 import com.example.foodservice.data.repository.RoleUserRepository;
 import com.example.foodservice.data.repository.UserRepository;
 import com.example.foodservice.ultis.bean.PayloadBean;
-import com.example.foodservice.ultis.bo.RoleUserBean;
+import com.example.foodservice.ultis.bean.RoleUserBean;
 import com.example.foodservice.ultis.form.UserForm;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

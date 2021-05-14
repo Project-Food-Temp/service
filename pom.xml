@@ -21,6 +21,7 @@
         <modelmapper.version>2.3.0</modelmapper.version>
         <apigoogle.version>1.30.9</apigoogle.version>
         <socialfacebook.version>1.5.22.RELEASE</socialfacebook.version>
+        <version.cloudinary>1.26.0</version.cloudinary>
     </properties>
     <dependencies>
         <dependency>
@@ -47,6 +48,13 @@
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
             <version>${jwt.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.cloudinary/cloudinary-http44 -->
+        <dependency>
+            <groupId>com.cloudinary</groupId>
+            <artifactId>cloudinary-http44</artifactId>
+            <version>${version.cloudinary}</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/com.google.api-client/google-api-client -->

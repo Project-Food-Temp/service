@@ -9,7 +9,7 @@ import com.example.foodservice.data.entity.User;
 import com.example.foodservice.data.repository.UserRepository;
 import com.example.foodservice.data.service.UserService;
 import com.example.foodservice.ultis.bean.PayloadBean;
-import com.example.foodservice.ultis.bo.TokenBean;
+import com.example.foodservice.ultis.bean.TokenBean;
 import com.example.foodservice.ultis.form.FormInfoGoogle;
 import com.example.foodservice.ultis.form.UserForm;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;

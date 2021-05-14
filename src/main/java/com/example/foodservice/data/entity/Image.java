@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Date;
 
 /**
  * Created by NhanNguyen on 5/5/2021
@@ -12,28 +11,30 @@ import java.util.Date;
  * @author: NhanNguyen
  * @date: 5/5/2021
  */
-
 @Getter
 @Setter
-@Entity(name = "category")
-public class Category {
+@Entity(name = "image")
+public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
-    @Column(name = "guid")
-    private String guid;
+    @Column(name = "guid_product")
+    private String guidProduct;
+
+    @Column(name = "guid_category")
+    private String guidCategory;
+
+    @Column(name = "guid_user")
+    private String guidUser;
 
     @Column(name = "name")
     private String name;
 
-    @Column(name = "description")
-    private String description;
+    @Column(name = "image_url")
+    private String imageUrl;
 
-    @Column(name = "is_current")
-    private boolean current;
-
-    @Column(name = "created_date")
-    private Date createdDate;
+    @Column(name = "image_id")
+    private String imageId;
 }

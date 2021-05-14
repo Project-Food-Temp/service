@@ -21,8 +21,11 @@ public class Product {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "id_category")
-    private int idCategory;
+    @Column(name = "guid_category")
+    private String guidCategory;
+
+    @Column(name = "guid")
+    private String guid;
 
     @Column(name = "name_product")
     private String nameProduct;

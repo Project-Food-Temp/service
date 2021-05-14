@@ -4,13 +4,22 @@ import com.example.foodservice.constants.CommonUtil;
 import com.example.foodservice.constants.Constants;
 import com.example.foodservice.constants.Response;
 import com.example.foodservice.data.entity.Category;
+import com.example.foodservice.data.entity.Image;
 import com.example.foodservice.data.repository.CategoriesRepository;
+import com.example.foodservice.data.repository.ImageRepository;
 import com.example.foodservice.data.service.CategoryService;
+import com.example.foodservice.data.service.ImageService;
+import com.example.foodservice.service.CloudinaryService;
+import com.example.foodservice.ultis.bean.ImageBean;
 import com.example.foodservice.ultis.form.CategoryForm;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by NhanNguyen on 5/5/2021
@@ -27,26 +36,45 @@ public class CategoryControl {
     @Autowired
     private CategoryService categoryService;
 
+    @Autowired
+    private ImageRepository imageRepository;
+
+    @Autowired
+    private ImageService imageService;
+
+    @Autowired
+    private CloudinaryService cloudinaryService;
+
     @PostMapping("/add")
     public @ResponseBody
-    Response saveOrUpdate(@RequestBody CategoryForm form) {
+    Response saveOrUpdate( CategoryForm form) {
         Category category;
+        Image image;
+        ModelMapper modelMapper = new ModelMapper();
         if (form.getId() > 0) {
+            // Update
             category = categoriesDAO.findById(form.getId()).orElse(null);
             if (CommonUtil.isEmpty(category)) {
                 return Response.warning(Constants.RESPONSE_CODE.WARNING, Constants.RESPONSE_CODE.RECORD_DELETED);
             } else {
-                category.setCurrent(form.isCurrent());
+                category = modelMapper.map(form, Category.class);
             }
         } else {
-            category = new Category();
+            // insert
+            UUID uuid = UUID.randomUUID();
+            category = modelMapper.map(form, Category.class);
+            category.setGuid(uuid.toString());
             category.setCurrent(true);
             category.setCreatedDate(new Date());
         }
-        category.setId(form.getId());
-        category.setDescription(form.getDescription());
-        category.setName(form.getName());
-        return Response.success(Constants.RESPONSE_CODE.SUCCESS).withData(category);
+        if (!CommonUtil.isEmpty(form.getMultipartFile())){
+            boolean uploadImage = imageService.uploadImageForCategory(category.getGuid(), form.getMultipartFile());
+            if (!uploadImage){
+                return Response.warning(Constants.RESPONSE_CODE.WARNING,Constants.MESSAGE.UPLOAD_ERROR);
+            }
+        }
+        categoriesDAO.save(category);
+        return Response.success(Constants.RESPONSE_CODE.SUCCESS);
     }
 
     @DeleteMapping("/{id}")
@@ -70,6 +98,12 @@ public class CategoryControl {
         } else {
             return Response.success(Constants.RESPONSE_CODE.SUCCESS).withData(category);
         }
+    }
+
+    @GetMapping("/list")
+    public @ResponseBody Response getList(){
+        List<Category> categories = (List<Category>) categoriesDAO.findAll();
+        return Response.success(Constants.RESPONSE_CODE.SUCCESS).withData(categories);
     }
 
 //    @GetMapping("/list/{id}")
