@@ -1,6 +1,6 @@
 package com.example.foodservice.constants;
 
-import com.example.foodservice.constants.CommonUtil;
+import com.example.foodservice.common.CommonUtil;
 
 import javax.servlet.http.HttpServletRequest;
 

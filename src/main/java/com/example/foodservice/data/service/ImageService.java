@@ -1,10 +1,9 @@
 package com.example.foodservice.data.service;
 
-import com.example.foodservice.constants.CommonUtil;
+import com.example.foodservice.common.CommonUtil;
 import com.example.foodservice.data.entity.Image;
 import com.example.foodservice.data.repository.ImageRepository;
 import com.example.foodservice.service.CloudinaryService;
-import com.example.foodservice.ultis.bean.ImageBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
-import javax.imageio.ImageReader;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.List;
