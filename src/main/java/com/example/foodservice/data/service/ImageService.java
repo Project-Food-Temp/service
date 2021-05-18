@@ -9,12 +9,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
 import javax.imageio.ImageReader;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -35,24 +37,13 @@ public class ImageService {
     @Autowired
     private CloudinaryService cloudinaryService;
 
-    public ImageBean uploadImage(MultipartFile multipartFile) {
-        ImageBean image = new ImageBean();
-        try {
-            BufferedImage bi = ImageIO.read(multipartFile.getInputStream());
-            if (Objects.isNull(bi)) {
-                return null;
-            }
-            Map result = cloudinaryService.upload(multipartFile);
-            image.setName(String.valueOf(result.get("original_filename")));
-            image.setImageUrl(String.valueOf(result.get("url")));
-            image.setImageId(String.valueOf(result.get("public_id")));
-        } catch (IOException e) {
-            logger.error(e.getMessage());
-            return null;
-        }
-        return image;
-    }
-
+    /**
+     *
+     * @param guid
+     * @param multipartFile
+     * @return
+     */
+    @Transactional
     public boolean uploadImageForCategory(String guid, MultipartFile multipartFile) {
         Image image;
         try {
@@ -66,7 +57,7 @@ public class ImageService {
                 image = new Image();
                 image.setGuidCategory(guid);
             } else {
-                cloudinaryService.delete(image.getImageId());
+                delete(image.getImageId());
             }
             image.setName(String.valueOf(result.get("original_filename")));
             image.setImageUrl(String.valueOf(result.get("url")));
@@ -79,9 +70,45 @@ public class ImageService {
         return true;
     }
 
-    public boolean delete(String imageId) {
+    /**
+     *
+     * @param guid
+     * @param fileImages
+     * @return
+     */
+    @Transactional
+    public boolean uploadFileForProduct(String guid, MultipartFile[] fileImages) {
+        List<Image> lstImage = imageRepository.findByGuidProduct(guid);
+        if (!CommonUtil.isNullOrEmpty(lstImage)) {
+            lstImage.forEach(item -> {
+               delete(item.getImageId());
+            });
+            lstImage.clear();
+        }
+        for (int i = 0; i < fileImages.length; i++) {
+            Image image = new Image();
+            try {
+                BufferedImage bi = ImageIO.read(fileImages[i].getInputStream());
+                if (CommonUtil.isEmpty(bi)) {
+                    return false;
+                }
+                Map result = cloudinaryService.upload(fileImages[i]);
+                image.setGuidProduct(guid);
+                image.setName(String.valueOf(result.get("original_filename")));
+                image.setImageUrl(String.valueOf(result.get("url")));
+                image.setImageId(String.valueOf(result.get("public_id")));
+                lstImage.add(image);
+            } catch (IOException e) {
+                logger.error(e.getMessage());
+                return false;
+            }
+        }
+        imageRepository.saveAll(lstImage);
+        return true;
+    }
+
+    public void delete(String imageId) {
         cloudinaryService.delete(imageId);
         imageRepository.deleteByImageId(imageId);
-        return true;
     }
 }

@@ -30,9 +30,6 @@ public class Product {
     @Column(name = "name_product")
     private String nameProduct;
 
-    @Column(name = "picture")
-    private String picture;
-
     @Column(name = "price")
     private Double price;
 

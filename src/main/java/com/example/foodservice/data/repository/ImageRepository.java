@@ -3,6 +3,7 @@ package com.example.foodservice.data.repository;
 import com.example.foodservice.data.entity.Image;
 import org.springframework.data.repository.CrudRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface ImageRepository extends CrudRepository<Image, Integer> {
@@ -11,4 +12,5 @@ public interface ImageRepository extends CrudRepository<Image, Integer> {
     void deleteByImageId(String imageId);
 
     Optional<Image> findByGuidCategory(String guid);
+    List<Image> findByGuidProduct(String guid);
 }

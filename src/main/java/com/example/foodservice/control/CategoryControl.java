@@ -42,14 +42,11 @@ public class CategoryControl {
     @Autowired
     private ImageService imageService;
 
-    @Autowired
-    private CloudinaryService cloudinaryService;
 
     @PostMapping("/add")
     public @ResponseBody
     Response saveOrUpdate( CategoryForm form) {
         Category category;
-        Image image;
         ModelMapper modelMapper = new ModelMapper();
         if (form.getId() > 0) {
             // Update
@@ -77,13 +74,17 @@ public class CategoryControl {
         return Response.success(Constants.RESPONSE_CODE.SUCCESS);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("delete/{id}")
     public @ResponseBody
     Response deleteCategory(@PathVariable int id) {
         Category category = categoriesDAO.findById(id).orElse(null);
         if (CommonUtil.isEmpty(category)) {
             return Response.warning(Constants.RESPONSE_CODE.WARNING, Constants.RESPONSE_CODE.RECORD_DELETED);
         } else {
+            Image imgCategory = imageRepository.findByGuidCategory(category.getGuid()).orElse(null);
+            if (!CommonUtil.isEmpty(imgCategory)){
+                imageService.delete(imgCategory.getImageId());
+            }
             categoriesDAO.deleteById(id);
             return Response.success(Constants.RESPONSE_CODE.SUCCESS);
         }
