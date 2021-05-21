@@ -17,22 +17,24 @@ import java.util.List;
 public interface CategoriesRepository extends CrudRepository<Category, Integer> {
     public default DataTableResults<CategoryBean> getDatatable(VfData vfData, CategoryForm form) {
         List<Object> paramList = new ArrayList<>();
-
-        String sql = "select c.name as name, " +
-                " c.description as description, " +
-                " c.is_current as current, " +
-                " c.created_date as createdDate " +
-                " from category c ";
+        String sql = "SELECT ";
+        sql += "    c.id as id, ";
+        sql += "    c.guid as guid, ";
+        sql += "    c.name as name,";
+        sql += "    img.image_url as urlImg,";
+        sql += "    c.is_current as current, ";
+        sql += "    c.description as description, ";
+        sql += "    img.name as fileName, ";
+        sql += "    c.created_date as createdDate ";
+        sql += "    FROM category c ";
+        sql += "    JOIN image img ON c.guid = img.guid_category ";
 
         StringBuilder strCondition = new StringBuilder(" WHERE 1 = 1 ");
-        if (!CommonUtil.isEmpty(form.getName())){
+        if (!CommonUtil.isEmpty(form.getName())) {
             CommonUtil.filter(form.getName(), strCondition, paramList, "c.name");
         }
-//        if (!CommonUtil.isEmpty(form.isCurrent())){
-//            CommonUtil.filter(form.isCurrent(), strCondition, paramList, "c.is_current");
-//        }
         String orderBy = " ORDER BY c.created_date DESC ";
-        return vfData.findPaginationQuery(sql + strCondition.toString(),orderBy, paramList, CategoryBean.class);
+        return vfData.findPaginationQuery(sql + strCondition.toString(), orderBy, paramList, CategoryBean.class);
     }
 
     ;

@@ -56,12 +56,12 @@ public class CategoryControl {
     @Autowired
     private ProductService productService;
 
-    @PostMapping("/add")
+    @PostMapping
     public @ResponseBody
     Response saveOrUpdate(CategoryForm form) {
         Category category;
         ModelMapper modelMapper = new ModelMapper();
-        if (form.getId() > 0) {
+        if (!CommonUtil.isEmpty(form.getId())) {
             // Update
             category = categoriesDAO.findById(form.getId()).orElse(null);
             if (CommonUtil.isEmpty(category)) {
