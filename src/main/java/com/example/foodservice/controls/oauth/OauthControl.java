@@ -1,4 +1,4 @@
-package com.example.foodservice.control.oauth;
+package com.example.foodservice.controls.oauth;
 
 import com.example.foodservice.auth.UserPrincipal;
 import com.example.foodservice.auth.jwt.JwtUtil;

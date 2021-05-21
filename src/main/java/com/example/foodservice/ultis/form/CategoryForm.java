@@ -24,8 +24,7 @@ public class CategoryForm {
     private String guid;
     private String name;
     private String description;
-    private boolean isCurrent;
+    private boolean current;
     private Date createdDate;
-    @JsonDeserialize
     private MultipartFile multipartFile;
 }

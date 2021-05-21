@@ -1116,7 +1116,7 @@ public class CommonUtil {
         StringBuilder sb = new StringBuilder("SELECT COUNT(*) FROM (#BASE_QUERY#) FILTERED_ORDERD_RESULTS ");
         String finalQuery = null;
         finalQuery = sb.toString().replaceAll("#BASE_QUERY#", baseQuery);
-        return (null == finalQuery) ? baseQuery : finalQuery;
+        return (CommonUtil.isEmpty(baseQuery)) ? baseQuery : finalQuery;
     }
 
     /**

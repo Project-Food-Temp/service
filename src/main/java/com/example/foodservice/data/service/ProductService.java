@@ -1,6 +1,5 @@
 package com.example.foodservice.data.service;
 
-import com.example.foodservice.control.CategoryControl;
 import com.example.foodservice.data.entity.Image;
 import com.example.foodservice.data.entity.Product;
 import com.example.foodservice.data.repository.ImageRepository;

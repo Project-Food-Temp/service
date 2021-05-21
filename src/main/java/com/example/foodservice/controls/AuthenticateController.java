@@ -1,4 +1,4 @@
-package com.example.foodservice.control;
+package com.example.foodservice.controls;
 
 import com.example.foodservice.auth.jwt.JwtUtil;
 import com.example.foodservice.constants.Constants;
@@ -6,7 +6,6 @@ import com.example.foodservice.constants.Response;
 import com.example.foodservice.ultis.form.UserForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;

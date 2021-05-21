@@ -1,4 +1,4 @@
-package com.example.foodservice.control;
+package com.example.foodservice.controls;
 
 import com.example.foodservice.common.CommonUtil;
 import com.example.foodservice.constants.Constants;

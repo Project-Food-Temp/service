@@ -1,4 +1,4 @@
-package com.example.foodservice.control;
+package com.example.foodservice.controls;
 
 import com.example.foodservice.common.CommonUtil;
 import com.example.foodservice.constants.Constants;
@@ -12,6 +12,8 @@ import com.example.foodservice.data.repository.ProductRepository;
 import com.example.foodservice.data.service.CategoryService;
 import com.example.foodservice.data.service.ImageService;
 import com.example.foodservice.data.service.ProductService;
+import com.example.foodservice.domain.DataTableResults;
+import com.example.foodservice.ultis.bean.CategoryBean;
 import com.example.foodservice.ultis.form.CategoryForm;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
@@ -121,21 +123,21 @@ public class CategoryControl {
         }
     }
 
-    @GetMapping("/list")
-    public @ResponseBody
-    Response getList() {
-        List<Category> categories = (List<Category>) categoriesDAO.findAll();
-        return Response.success(Constants.RESPONSE_CODE.SUCCESS).withData(categories);
-    }
+//    @GetMapping("/list")
+//    public @ResponseBody
+//    Response getList() {
+//        List<Category> categories = (List<Category>) categoriesDAO.findAll();
+//        return Response.success(Constants.RESPONSE_CODE.SUCCESS).withData(categories);
+//    }
 
 //    @GetMapping("/list/{id}")
 //    private @ResponseBody Response getListCategoryById(@PathVariable int id){
 //
 //    }
 
-//    @GetMapping("/search")
-//    public @ResponseBody
-//    Response processSearch(CategoryForm form) {
-//
-//    }
+    @GetMapping("/search")
+    public @ResponseBody
+    DataTableResults<CategoryBean> processSearch(CategoryForm form) {
+        return categoryService.getDataTables(form);
+    }
 }
