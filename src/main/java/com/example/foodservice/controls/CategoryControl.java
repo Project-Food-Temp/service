@@ -65,9 +65,11 @@ public class CategoryControl {
             // Update
             category = categoriesDAO.findById(form.getId()).orElse(null);
             if (CommonUtil.isEmpty(category)) {
-                return Response.warning(Constants.RESPONSE_CODE.WARNING, Constants.RESPONSE_CODE.RECORD_DELETED);
-            } else {
-                category = modelMapper.map(form, Category.class);
+                return Response.warning(Constants.RESPONSE_CODE.WARNING,
+                        Constants.RESPONSE_CODE.RECORD_DELETED);
+            }else {
+                category.setGuid(form.getGuid());
+//                category.setCurrent(form.getCurrent());
             }
         } else {
             // insert
@@ -83,6 +85,8 @@ public class CategoryControl {
                 return Response.warning(Constants.RESPONSE_CODE.WARNING, Constants.MESSAGE.UPLOAD_ERROR);
             }
         }
+        category.setName(form.getName());
+        category.setDescription(form.getDescription());
         categoriesDAO.save(category);
         return Response.success(Constants.RESPONSE_CODE.SUCCESS);
     }
