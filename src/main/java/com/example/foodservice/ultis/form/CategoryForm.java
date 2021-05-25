@@ -1,5 +1,7 @@
 package com.example.foodservice.ultis.form;
 
+import com.example.foodservice.data.entity.Category;
+import com.example.foodservice.ultis.bean.CategoryBean;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -11,6 +13,7 @@ import javax.persistence.TemporalType;
 import java.io.File;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by NhanNguyen on 5/5/2021
@@ -32,4 +35,5 @@ public class CategoryForm {
 //    @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
     private MultipartFile multipartFile;
+    private List<Integer> categories;
 }

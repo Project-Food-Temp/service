@@ -25,6 +25,7 @@ import java.util.Objects;
  * @date: 5/5/2021
  */
 @Service
+@Transactional
 public class ImageService {
 
     private static final Logger logger = LoggerFactory.getLogger(ImageService.class);

@@ -8,6 +8,11 @@ import com.example.foodservice.data.entity.Product;
 import com.example.foodservice.data.repository.ImageRepository;
 import com.example.foodservice.data.repository.ProductRepository;
 import com.example.foodservice.data.service.ImageService;
+import com.example.foodservice.data.service.ProductService;
+import com.example.foodservice.domain.DataTableResults;
+import com.example.foodservice.ultis.bean.CategoryBean;
+import com.example.foodservice.ultis.bean.ProductBean;
+import com.example.foodservice.ultis.form.CategoryForm;
 import com.example.foodservice.ultis.form.ProductForm;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
@@ -34,11 +39,14 @@ public class ProductControl {
     private ProductRepository productRepository;
 
     @Autowired
+    private ProductService productService;
+
+    @Autowired
     private ImageService imageService;
     @Autowired
     private ImageRepository imageRepository;
 
-    @PostMapping()
+    @PostMapping
     public @ResponseBody
     Response saveOrUpdate(ProductForm form) {
         Product product;
@@ -84,5 +92,11 @@ public class ProductControl {
         }
         productRepository.deleteById(id);
         return Response.success(Constants.RESPONSE_CODE.SUCCESS);
+    }
+
+    @GetMapping("/search")
+    public @ResponseBody
+    DataTableResults<ProductBean> processSearch(ProductForm form) {
+        return productService.getDataTables(form);
     }
 }
