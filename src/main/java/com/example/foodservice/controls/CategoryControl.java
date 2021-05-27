@@ -64,12 +64,14 @@ public class CategoryControl {
     Response saveOrUpdate(CategoryForm form) {
         Category category;
         ModelMapper modelMapper = new ModelMapper();
+        if (categoriesDAO.existsCategoriesByName(form.getName())){
+            return Response.warning(Constants.RESPONSE_CODE.EXISTS_NAME);
+        }
         if (!CommonUtil.isEmpty(form.getId())) {
             // Update
             category = categoriesDAO.findById(form.getId()).orElse(null);
             if (CommonUtil.isEmpty(category)) {
-                return Response.warning(Constants.RESPONSE_CODE.WARNING,
-                        Constants.RESPONSE_CODE.RECORD_DELETED);
+                return Response.warning(Constants.RESPONSE_CODE.RECORD_DELETED);
             } else {
                 category.setGuid(form.getGuid());
 //                category.setCurrent(form.getCurrent());

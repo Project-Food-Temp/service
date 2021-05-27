@@ -38,11 +38,11 @@ public class User {
     @Column(name = "username", unique = false, nullable = false)
     private String username;
 
-    @Column(name = "passwrod_hash", nullable = false)
-    private String passwordHash;
+    @Column(name = "passwrod", nullable = false)
+    private String password;
 
-    @Column(name = "picture")
-    private String picture;
+    @Column(name = "picture_provider")
+    private String pictureProvider;
 
     @Column(name = "date_of_birth")
     private Date dob;
@@ -74,8 +74,6 @@ public class User {
     @Column(name = "create_date")
     private Date createDate;
 
-    @Transient
-    private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "role_user", joinColumns = {
@@ -89,8 +87,7 @@ public class User {
         this.lastName = user.getLastName();
         this.firstName = user.getFirstName();
         this.username = user.getUsername();
-        this.passwordHash = user.getPasswordHash();
-        this.picture = user.getPicture();
+        this.password = user.getPassword();
         this.dob = user.getDob();
         this.gender = user.getGender();
         this.email = user.getEmail();

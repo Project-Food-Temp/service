@@ -4,21 +4,19 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Date;
 
 /**
- * Created by NhanNguyen on 5/5/2021
+ * Created by Nhan Nguyen on 5/27/2021
  *
- * @author: NhanNguyen
- * @date: 5/5/2021
+ * @author Nhan Nguyen
+ * @date 5/27/2021
  */
-
 @Getter
 @Setter
-@Entity(name = "category")
-public class Category {
-    @Id
+@Entity(name = "option_topping")
+public class OptionTopping {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
     @Column(name = "id")
     private int id;
 
@@ -28,12 +26,6 @@ public class Category {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "description")
-    private String description;
-
-    @Column(name = "is_current")
-    private Boolean current;
-
-    @Column(name = "created_date")
-    private Date createdDate;
+    @Column(name = "price")
+    private Double price;
 }

@@ -112,7 +112,7 @@ public class UserService {
                 return StatusRegisterUserEnum.Existed_Email;
             }
 
-            user.setPasswordHash(passwordEncoder.encode(user.getPassword()));
+            user.setPassword(passwordEncoder.encode(form.getPassword()));
             user.setCreateDate(new Date());
             UUID uuid = UUID.randomUUID();
             String guid = uuid.toString();
@@ -145,8 +145,8 @@ public class UserService {
             user.setLastName(payloadBean.getGiven_name());
             user.setUsername(payloadBean.getName());
             user.setEmail(payloadBean.getEmail());
-            user.setPicture(payloadBean.getPicture());
-            user.setPasswordHash(passwordEncoder.encode(secretGoogle));
+            user.setPictureProvider(payloadBean.getPicture());
+            user.setPassword(passwordEncoder.encode(secretGoogle));
             user.setCreateDate(new Date());
             user.setGuid(payloadBean.getSub());
             user.setEnable(true);

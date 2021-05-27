@@ -26,6 +26,7 @@ public interface ProductRepository extends CrudRepository<Product,Integer> {
         sql += "    p.price as price, ";
         sql += "    p.quantity as quantity, ";
         sql += "    p.is_current as current, ";
+        sql += "    img.image_url as picture, ";
         sql += "    p.description as description, ";
         sql += "    p.created_date as createdDate, ";
         sql += "    c.name as category, ";
@@ -36,7 +37,8 @@ public interface ProductRepository extends CrudRepository<Product,Integer> {
 
         StringBuilder strCondition = new StringBuilder(" WHERE 1 = 1");
 
-        String orderBy = " ORDER BY p.created_date DESC ";
+        strCondition.append("   GROUP BY p.guid ");
+        String orderBy = "  ORDER BY p.created_date DESC ";
         return vfData.findPaginationQuery(sql + strCondition.toString(),orderBy,paramList,ProductBean.class);
     }
 }

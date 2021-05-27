@@ -13,12 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Nhan Nguyen on 5/19/2021
@@ -154,6 +152,17 @@ public class VfDataIml implements VfData {
                                                        List<Object> paramList, Class obj) {
         return findPagination(nativeQuery, orderBy, paramList, obj, 5);
     }
+
+    @Override
+    public List<Object> findAllByQuery(String nativeQuery, Class obj) {
+        SQLQuery query = createSQLQuery(nativeQuery);
+        setResultTransformer(query, obj);
+//        Session session = entityManager.unwrap(Session.class);
+//        Query query = session.createQuery(nativeQuery)
+//                .setResultTransformer(Transformers.aliasToBean(obj));
+        return query.getResultList();
+    }
+
 
     private <T> DataTableResults<T> findPagination(String nativeQuery, String orderBy,
                                                    List<Object> paramList, Class obj, int limit) {

@@ -24,7 +24,7 @@ public class Product {
     @Column(name = "guid_category")
     private String guidCategory;
 
-    @Column(name = "guid")
+    @Column(name = "guid",unique = true)
     private String guid;
 
     @Column(name = "name_product")
