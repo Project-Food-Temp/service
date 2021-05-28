@@ -64,9 +64,6 @@ public class CategoryControl {
     Response saveOrUpdate(CategoryForm form) {
         Category category;
         ModelMapper modelMapper = new ModelMapper();
-        if (categoriesDAO.existsCategoriesByName(form.getName())){
-            return Response.warning(Constants.RESPONSE_CODE.EXISTS_NAME);
-        }
         if (!CommonUtil.isEmpty(form.getId())) {
             // Update
             category = categoriesDAO.findById(form.getId()).orElse(null);
@@ -78,6 +75,9 @@ public class CategoryControl {
             }
         } else {
             // insert
+            if (categoriesDAO.existsCategoriesByName(form.getName())){
+                return Response.warning(Constants.RESPONSE_CODE.EXISTS_NAME);
+            }
             UUID uuid = UUID.randomUUID();
             category = modelMapper.map(form, Category.class);
             category.setGuid(uuid.toString());
@@ -95,17 +95,6 @@ public class CategoryControl {
         categoriesDAO.save(category);
         return Response.success(Constants.RESPONSE_CODE.SUCCESS);
     }
-
-//    @DeleteMapping("delete/{id}")
-//    public @ResponseBody
-//    Response deleteCategory(@PathVariable int id) throws ExecutionException, InterruptedException {
-//        Category category = categoriesDAO.findById(id).orElse(null);
-//        if (CommonUtil.isEmpty(category)) {
-//            return Response.warning(Constants.RESPONSE_CODE.WARNING, Constants.RESPONSE_CODE.RECORD_DELETED);
-//        }
-//
-//        return Response.success(Constants.RESPONSE_CODE.SUCCESS);
-//    }
 
     @GetMapping("/{id}")
     public @ResponseBody

@@ -18,7 +18,7 @@ public class OptionTopping {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
-    private int id;
+    private Integer id;
 
     @Column(name = "guid",unique = true)
     private String guid;

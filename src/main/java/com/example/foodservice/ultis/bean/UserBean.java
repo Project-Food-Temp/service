@@ -19,7 +19,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserBean {
-    private int id;
+    private Integer id;
     private String guid;
     private String username;
     private String password;

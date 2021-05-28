@@ -59,7 +59,7 @@ public class OptionIceControl {
     }
     @DeleteMapping("delete/{id}")
     public @ResponseBody
-    Response deleteCategory(@PathVariable int id) throws ExecutionException, InterruptedException {
+    Response deleteCategory(@PathVariable int id) {
         OptionIce optionIce = optionIceDAO.findById(id).orElse(null);
         if (CommonUtil.isEmpty(optionIce)) {
             return Response.warning(Constants.RESPONSE_CODE.WARNING, Constants.RESPONSE_CODE.RECORD_DELETED);

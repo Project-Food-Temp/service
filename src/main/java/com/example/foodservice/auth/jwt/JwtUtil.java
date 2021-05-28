@@ -25,7 +25,7 @@ public class JwtUtil implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private static final long JWT_TOKEN_VALIDITY = 60 * 60 * 24;
+    private static final long JWT_TOKEN_VALIDITY = 60 * 60 * 8;
 
     //    get username from jwt token
     public String extractUsername(String token) {
