@@ -38,9 +38,12 @@ public class CloudinaryService {
         File file = convert(multipartFile);
         Map result = null;
         try {
+            cloudinary.api().subFolders("/demo",ObjectUtils.emptyMap());
             result = cloudinary.uploader().upload(file, ObjectUtils.emptyMap());
         } catch (IOException e) {
             logger.error(e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         file.delete();
         return result;
