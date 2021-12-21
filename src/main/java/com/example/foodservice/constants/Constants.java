@@ -54,17 +54,7 @@ public class Constants {
         public static final String EMAIL_ADDRESS_DELETED = "emailAddress.deleted";
         public static final String RECORD_INUSED = "record.inUsed";
         public static final String DOCUMENT_TYPE_EXISTED = "documentTypeExits";
-        public static final String DUPICATE_DATA_REDUCTION = "taxReduction.duplicateData";
         public static final String PARAMETER_USED = "parameterUsed";
-        public static final String NOT_ALLOWED_DELETE_DATA_TYPE = "dataType.recordInUsed";
-        public static final String NOT_ALLOWED_DELETE_FORMULA = "formula.config.cannotDelete";
-        public static final String NOT_ALLOWED_CHANGE_STATUS_FORMULA = "formula.config.cannotChange";
-        public static final String NOT_ALLOWED_EVALUATION = "evaluation.cannotEvaluation";
-        public static final String NO_RECORDS = "evaluation.noRecords";
-        public static final String LOCK_UNIT = "evaluation.orglocked";
-        public static final String NO_DATA_EVALUATION = "evaluation.noData";
-        public static final String PAYROLL_IS_LOCK = "ERROR.payroll.calculate.isLock";
-        public static final String PAYROLL_IS_PAID = "ERROR.payroll.calculate.paid";
         public static final String ROLE_EXIST = "permission.role.exist";
         public static final String MENU_HAVE_CHILD = "permission.menu.haveChild";
         public static final String ERROR_COMPOSITE = "error.composite";
@@ -74,9 +64,8 @@ public class Constants {
         public static final String SUCCESS_SAVE = "success.save";
         public static final String DELETE_ERROR = "error.delete";
         public static final String SAVE_DUPLICATE_CODE = "save.duplicateCode";
-        public static final String DOMAIN_DUPLICATE_CODE = "permission.duplicateDomain";
-        public static final String SYNC_TAX_SUCCESS = "synctax.success";
-        public static final String SYNC_TAX_ERROR = "synctax.error";
+        public static final String EXISTS_NAME = "exists.name";
+        public static final String EXISTS_OPTION = "exists.option";
     }
 
     public static class WARNING_TYPE {
@@ -87,8 +76,9 @@ public class Constants {
     }
 
     public static class MESSAGE {
-        public static final String LOGIN_FAIL="Incorrect username or password";
+        public static final String LOGIN_FAIL="account.incorrect";
         public static final String UPLOAD_ERROR="upload.fail";
+        public static final String DELETE_ERROR="delete.fail";
     }
 
 

@@ -15,6 +15,10 @@ import java.util.List;
 
 @Transactional
 public interface CategoriesRepository extends CrudRepository<Category, Integer> {
+
+
+    boolean existsCategoriesByName(String name);
+
     public default DataTableResults<CategoryBean> getDatatable(VfData vfData, CategoryForm form) {
         List<Object> paramList = new ArrayList<>();
         String sql = "SELECT ";
@@ -27,7 +31,7 @@ public interface CategoriesRepository extends CrudRepository<Category, Integer> 
         sql += "    img.name as fileName, ";
         sql += "    c.created_date as createdDate ";
         sql += "    FROM category c ";
-        sql += "    JOIN image img ON c.guid = img.guid_category ";
+        sql += "    LEFT JOIN image img ON c.guid = img.guid_category ";
 
         StringBuilder strCondition = new StringBuilder(" WHERE 1 = 1 ");
         if (!CommonUtil.isEmpty(form.getName())) {
@@ -36,6 +40,4 @@ public interface CategoriesRepository extends CrudRepository<Category, Integer> 
         String orderBy = " ORDER BY c.created_date DESC ";
         return vfData.findPaginationQuery(sql + strCondition.toString(), orderBy, paramList, CategoryBean.class);
     }
-
-    ;
 }

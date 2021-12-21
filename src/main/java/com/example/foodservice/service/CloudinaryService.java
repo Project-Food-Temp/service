@@ -29,6 +29,7 @@ public class CloudinaryService {
         valuesMap.put("cloud_name","djugby2md");
         valuesMap.put("api_key","585188152353576");
         valuesMap.put("api_secret","7cBbkK1mCetTs72b_Q8X6EzhkwY");
+//        valuesMap.put("folder","demo");
         cloudinary = new Cloudinary(valuesMap);
     }
 
@@ -37,9 +38,12 @@ public class CloudinaryService {
         File file = convert(multipartFile);
         Map result = null;
         try {
+            cloudinary.api().subFolders("/demo",ObjectUtils.emptyMap());
             result = cloudinary.uploader().upload(file, ObjectUtils.emptyMap());
         } catch (IOException e) {
             logger.error(e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         file.delete();
         return result;

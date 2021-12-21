@@ -8,6 +8,11 @@ import com.example.foodservice.data.entity.Product;
 import com.example.foodservice.data.repository.ImageRepository;
 import com.example.foodservice.data.repository.ProductRepository;
 import com.example.foodservice.data.service.ImageService;
+import com.example.foodservice.data.service.ProductService;
+import com.example.foodservice.domain.DataTableResults;
+import com.example.foodservice.ultis.bean.CategoryBean;
+import com.example.foodservice.ultis.bean.ProductBean;
+import com.example.foodservice.ultis.form.CategoryForm;
 import com.example.foodservice.ultis.form.ProductForm;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
@@ -17,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -34,16 +40,19 @@ public class ProductControl {
     private ProductRepository productRepository;
 
     @Autowired
+    private ProductService productService;
+
+    @Autowired
     private ImageService imageService;
     @Autowired
     private ImageRepository imageRepository;
 
-    @PostMapping()
+    @PostMapping
     public @ResponseBody
     Response saveOrUpdate(ProductForm form) {
         Product product;
         ModelMapper modelMapper = new ModelMapper();
-        if (form.getId() > 0) {
+        if (Objects.nonNull(form.getId())) {
             //Update
             product = productRepository.findById(form.getId()).orElse(null);
             if (CommonUtil.isEmpty(product)) {
@@ -61,8 +70,8 @@ public class ProductControl {
             product.setGuidCategory(form.getGuidCategory());
         }
         if ((!CommonUtil.isEmpty(form.getFileImages()))) {
-            boolean flagUplaod = imageService.uploadFileForProduct(product.getGuid(), form.getFileImages());
-            if (!flagUplaod) {
+            boolean flagUpload = imageService.uploadFileForProduct(product.getGuid(), form.getFileImages());
+            if (!flagUpload) {
                 return Response.warning(Constants.RESPONSE_CODE.WARNING, Constants.MESSAGE.UPLOAD_ERROR);
             }
         }
@@ -84,5 +93,11 @@ public class ProductControl {
         }
         productRepository.deleteById(id);
         return Response.success(Constants.RESPONSE_CODE.SUCCESS);
+    }
+
+    @GetMapping("/search")
+    public @ResponseBody
+    DataTableResults<ProductBean> processSearch(ProductForm form) {
+        return productService.getDataTables(form);
     }
 }

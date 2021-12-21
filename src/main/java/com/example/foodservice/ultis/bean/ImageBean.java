@@ -10,7 +10,7 @@ import lombok.Data;
  */
 @Data
 public class ImageBean {
-    private int id;
+    private Integer id;
     private String guidProduct;
     private String guidCategory;
     private String guidUser;

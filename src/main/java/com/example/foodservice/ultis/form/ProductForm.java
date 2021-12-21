@@ -14,9 +14,9 @@ import java.util.List;
  */
 @Data
 public class ProductForm {
-    private int id;
+    private Integer id;
     private String guidCategory;
-    private String nameProduct;
+    private String name;
     private String picture;
     private Double price;
     private Long quantity;

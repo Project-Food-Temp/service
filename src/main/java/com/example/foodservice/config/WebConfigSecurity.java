@@ -77,11 +77,11 @@ public class WebConfigSecurity extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/oauth/**","/authenticate", "/api/create-account", "/user/register").permitAll()
+                .antMatchers("/oauth/**","/authenticate").permitAll()
                 .antMatchers(AUTH_LIST).permitAll()
-                .antMatchers("/admin/**", "/user/**").hasAuthority("ADMIN")
-                .antMatchers("/user/**").hasAuthority("USER")
-//                .anyRequest().authenticated()
+//                .antMatchers("/admin/**", "/user/**").hasAuthority("ADMIN")
+//                .antMatchers("/user/**").hasAuthority("USER")
+                .anyRequest().authenticated()
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);

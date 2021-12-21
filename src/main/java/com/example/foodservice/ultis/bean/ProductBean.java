@@ -12,13 +12,14 @@ import java.util.Date;
  */
 @Data
 public class ProductBean {
-    private int id;
-    private int idCategory;
-    private String nameProduct;
+    private Integer id;
+    private String category;
+    private String guidCategory;
+    private String name;
     private String picture;
     private Double price;
     private Long quantity;
-    private boolean isCurrent;
+    private Boolean current;
     private String description;
     private Date createdDate;
 }
