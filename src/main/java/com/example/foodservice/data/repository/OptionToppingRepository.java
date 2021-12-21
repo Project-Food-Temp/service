@@ -3,6 +3,7 @@ package com.example.foodservice.data.repository;
 import com.example.foodservice.common.VfData;
 import com.example.foodservice.data.entity.OptionTopping;
 import com.example.foodservice.domain.DataTableResults;
+import com.example.foodservice.ultis.bean.OptionSizeBean;
 import com.example.foodservice.ultis.bean.OptionToppingBean;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,5 +37,16 @@ public interface OptionToppingRepository extends CrudRepository<OptionTopping,In
 
         String orderBy = " ORDER BY ot.id DESC ";
         return vfData.findPaginationQuery(sql,orderBy,paramList,OptionToppingBean.class);
+    }
+
+    public default List<OptionToppingBean> getOptionToppingAll(VfData vfData) {
+        String sql = "  SELECT ";
+        sql +=  "   ot.id as id, ";
+        sql +=  "   ot.guid as guid, ";
+        sql +=  "   ot.name as name, ";
+        sql +=  "   ot.price as price ";
+        sql +=  "   FROM option_topping ot ";
+        sql +=  "   ORDER BY ot.id";
+        return vfData.findAllByQuery(sql, OptionToppingBean.class);
     }
 }

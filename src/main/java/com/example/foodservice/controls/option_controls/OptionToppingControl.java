@@ -7,6 +7,7 @@ import com.example.foodservice.data.entity.OptionTopping;
 import com.example.foodservice.data.repository.OptionToppingRepository;
 import com.example.foodservice.data.service.OptionToppingService;
 import com.example.foodservice.domain.DataTableResults;
+import com.example.foodservice.ultis.bean.OptionIceBean;
 import com.example.foodservice.ultis.bean.OptionToppingBean;
 import com.example.foodservice.ultis.form.OptionSizeForm;
 import com.example.foodservice.ultis.form.OptionToppingForm;
@@ -16,6 +17,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -67,5 +69,12 @@ public class OptionToppingControl {
         }
         optionToppingDAO.deleteById(id);
         return Response.success(Constants.RESPONSE_CODE.SUCCESS);
+    }
+
+    @GetMapping("/find_all")
+    public @ResponseBody
+    Response findAll(){
+        List<OptionToppingBean> lst = optionToppingService.findOptionsTopping();
+        return Response.success(Constants.RESPONSE_CODE.SUCCESS).withData(lst);
     }
 }

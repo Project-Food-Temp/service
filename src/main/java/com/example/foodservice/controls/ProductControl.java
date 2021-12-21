@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -51,8 +52,7 @@ public class ProductControl {
     Response saveOrUpdate(ProductForm form) {
         Product product;
         ModelMapper modelMapper = new ModelMapper();
-
-        if (form.getId() > 0) {
+        if (Objects.nonNull(form.getId())) {
             //Update
             product = productRepository.findById(form.getId()).orElse(null);
             if (CommonUtil.isEmpty(product)) {
@@ -70,8 +70,8 @@ public class ProductControl {
             product.setGuidCategory(form.getGuidCategory());
         }
         if ((!CommonUtil.isEmpty(form.getFileImages()))) {
-            boolean flagUplaod = imageService.uploadFileForProduct(product.getGuid(), form.getFileImages());
-            if (!flagUplaod) {
+            boolean flagUpload = imageService.uploadFileForProduct(product.getGuid(), form.getFileImages());
+            if (!flagUpload) {
                 return Response.warning(Constants.RESPONSE_CODE.WARNING, Constants.MESSAGE.UPLOAD_ERROR);
             }
         }

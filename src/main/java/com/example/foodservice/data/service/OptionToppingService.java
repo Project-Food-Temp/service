@@ -9,6 +9,8 @@ import com.example.foodservice.ultis.form.CategoryForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by Nhan Nguyen on 5/27/2021
  *
@@ -25,5 +27,9 @@ public class OptionToppingService {
     public DataTableResults<OptionToppingBean> getDataTables(){
         DataTableResults<OptionToppingBean> dtTable = optionToppingDAO.getDatatable(vfData);
         return dtTable;
+    }
+
+    public List<OptionToppingBean> findOptionsTopping(){
+        return optionToppingDAO.getOptionToppingAll(vfData);
     }
 }
