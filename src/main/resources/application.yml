@@ -22,6 +22,7 @@ spring:
     username: b5941b2d075b5d
 #    password: nhanbn98
     password: cebfac38
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
 google:
   clientId: 569599946060-9s09k2ujflc4ar0p5fsml7t6d78i3a0v.apps.googleusercontent.com
