@@ -23,6 +23,7 @@
         <socialfacebook.version>1.5.22.RELEASE</socialfacebook.version>
         <version.cloudinary>1.26.0</version.cloudinary>
         <version.gson>2.8.5</version.gson>
+        <project.parent.version>2.3.6.RELEASE</project.parent.version>
     </properties>
     <dependencies>
         <dependency>
@@ -135,6 +136,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${project.parent.version}</version>
                 <configuration>
                     <excludes>
                         <exclude>
