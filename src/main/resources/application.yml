@@ -8,8 +8,8 @@ spring:
     active: heroku
 
   jpa:
-#    database-platform: org.hibernate.dialect.MySQL8Dialect
-    database-platform: com.mysql.cj.jdbc.Driver
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+#    database-platform: com.mysql.cj.jdbc.Driver
     hibernate:
       ddl-auto: update
     show-sql: true
