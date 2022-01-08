@@ -15,7 +15,6 @@ import com.example.foodservice.data.service.ProductService;
 import com.example.foodservice.domain.DataTableResults;
 import com.example.foodservice.ultis.bean.CategoryBean;
 import com.example.foodservice.ultis.form.CategoryForm;
-import com.sun.org.apache.regexp.internal.RE;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +27,6 @@ import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Created by NhanNguyen on 5/5/2021
