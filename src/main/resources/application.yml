@@ -1,8 +1,12 @@
 server:
-  port: 9001
-
+  port: 80
+  servlet:
+    context-path: /
 #spring-hibernate for mysql
 spring:
+  profiles:
+    active: heroku
+
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:
@@ -21,3 +25,5 @@ spring:
 google:
   clientId: 569599946060-9s09k2ujflc4ar0p5fsml7t6d78i3a0v.apps.googleusercontent.com
   secretPsw: kjsfdhkjhfdslhfdslhfdsuiuuiywe
+
+
